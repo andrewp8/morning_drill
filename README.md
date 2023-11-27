@@ -1,18 +1,37 @@
-# sinatra-template
+# Morning-Drill app
 
-Use this repository to create new Sinatra apps. 
+- An interactive Ruby Sinatra application that fetches a joke, answers your question using ChatGPT, and provides weather advice based on your location.
 
-Optionally, to use `ActiveRecord` for database operations, add to the `app.rb`:
+## Prerequisites
 
-```ruby
-require "sinatra/activerecord"
-```
+- Ruby installed (version 3.2.1)
+- Sinatra gem installed
+- API keys for Google Map, weather, and ChatGPT API
 
-And in the `config/environment.rb` file add this code block:
+## Installation
 
-```ruby
-configure do
-  # setup a database connection
-  set(:database, { adapter: "sqlite3", database: "db/development.sqlite3" })
-end
-```
+  1. Clone the repository:
+
+    ```bash
+      git clone https://github.com/andrewp8/morning_drill.git
+    ```
+  2. Install required gems:
+
+    ```bash
+      bundle install
+    ```
+  3. Set up API keys:
+    - [Joke API](https://geek-jokes.sameerkumar.website/api?format=json) :  key **NOT** required.
+    - Checkout [Google Maps API](https://developers.google.com/maps/documentation/geocoding/get-api-key) for more information. Key **required**.
+    - Check out [Pirate Weather](https://pirateweather.net/en/latest/) for more information. Key **required**.
+    -Checkout [ChatGPT API documentation](https://platform.openai.com/docs/api-reference/making-requests) for more information. Key **required**.
+  4. Run the app:
+    ```bash
+      bin/dev
+    ```
+## Usage:
+  - Open your browser and navigate to http://localhost:YOUR-PORT
+
+## Contributing
+
+  - Contributions are welcome! Please fork the repository and submit a pull request.
