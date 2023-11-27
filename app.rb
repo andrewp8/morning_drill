@@ -5,7 +5,8 @@ require "http"
 #GMAP, WEATHER, OPENAI APIS
 gmap_api = ENV.fetch("GMAPS_KEY")
 weather_api = ENV.fetch("PIRATE_WEATHER_KEY")
-openai_api = "https://api.openai.com/v1/chat/completions"
+openai_api = ENV.fetch("OPENAI_API_KEY")
+
 before {
     # ========= DATE ============
     @today = Time.now.strftime('%m/%d/%Y')
@@ -56,8 +57,37 @@ post("/display"){
 
   # ======== MESSAGE =========
   user_input = params["user_input"]
+  openai_url = "https://api.openai.com/v1/chat/completions"
 
+    openai_request_headers_hash = {
+    "Authorization" => "Bearer #{openai_api}",
+    "content-type" => "application/json"
+  }
 
+  ropenai_equest_body_hash = {
+    "model" => "gpt-3.5-turbo",
+    "messages" => [
+      {
+        "role" => "system",
+        "content" => "You are a helpful assistant who talks like a funny and silly robot."
+      },
+      {
+        "role" => "user",
+        "content" => "#{user_input.to_s}"
+      }
+    ]
+  }
+
+  # generate hash to json string
+  openai_request_body_json = JSON.generate(openai_request_body_hash)
+
+  openai_raw_response = HTTP.headers(openai_request_headers_hash).post(
+    openai_url,
+    :body => openai_request_body_json
+  ).to_s
+
+  openai_parsed_response = JSON.parse(openai_raw_response)
+  @message = openai_parsed_response.dig("choices",0,"message","content")
 
   erb(:display)
 }
