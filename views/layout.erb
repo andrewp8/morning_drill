@@ -4,9 +4,53 @@
     <title>Sinatra Template</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+
+    <style>
+      *{
+        font-family: 'Poppins', sans-serif;
+font-family: 'Space Mono', monospace;
+      }
+     .gradient-background {
+        background: linear-gradient(300deg,#FF99C9,#C1BDDB,#A2C7E5,#58FCEC,#303A2B);
+        background-size: 300% 300%;
+        animation: gradient-animation 30s ease infinite;
+      }
+
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .glass_background{
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+       background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 12px;
+       border: 1px solid rgba(255, 255, 255, 0.125);
+      }
+    </style>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="m-5 border border-2 rounded">
+   <div class="p-5 gradient-background">
+    <div class="glass_background p-2">
+     <h1><%= @today %></h1>
+      <h1><%= @weekday_name %>'s morning drill</h1>
+      <%= yield %>
+    </div>
+    </div>
+     
+   
   </body>
 </html>

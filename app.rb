@@ -2,19 +2,26 @@ require "sinatra"
 require "sinatra/reloader"
 require "http"
 
-#GMAP & WEATHER APIS
+#GMAP, WEATHER, OPENAI APIS
 gmap_api = ENV.fetch("GMAPS_KEY")
 weather_api = ENV.fetch("PIRATE_WEATHER_KEY")
+openai_api = "https://api.openai.com/v1/chat/completions"
+before {
+    # ========= DATE ============
+    @today = Time.now.strftime('%m/%d/%Y')
+    @weekday_name = Time.now.strftime('%A')
+}
 
 get("/") do
+
   erb(:homepage)
   
 end
 
 post("/display"){
-  @location = params["user_location"]
+  location = params["user_location"]
   # ======GMAP DATA======
-  gmap_url = "https://maps.googleapis.com/maps/api/geocode/json?address=Merchandise%20Mart%20"+@location.gsub(" ","%20")+"&key="+gmap_api
+  gmap_url = "https://maps.googleapis.com/maps/api/geocode/json?address=Merchandise%20Mart%20"+location.gsub(" ","%20")+"&key="+gmap_api
   gmap_raw_response =  HTTP.get(gmap_url).to_s
   gmap_parsed_response = JSON.parse(gmap_raw_response)
   gmap_location_result = gmap_parsed_response.dig("results",0, "geometry", "location")
@@ -39,8 +46,18 @@ post("/display"){
     over_10_percent = true
   end
   }
-  over_10_percent == true ? @umbrella_mgs = "You might want to carry an umbrella!" : @umbrella_mgs = "It's going to be #{@summary}. Enjoy your day!"
+  over_10_percent == true ? @umbrella_mgs = "#{location.capitalize} is #{@current_summary.downcase}ing and currently #{@current_temp} degree. You might want to carry an umbrella!" : @umbrella_mgs = "#{location.capitalize} is #{@current_summary.downcase} and currently #{@current_temp} degree. Enjoy your day!"
 
-  
-  erb(:umbrella_process)
+  # ======== JOKES =========
+  joke_URL = "https://geek-jokes.sameerkumar.website/api?format=json"
+  joke_response = HTTP.get(joke_URL).to_s
+  joke_parsed_response = JSON.parse(joke_response)
+  @joke = joke_parsed_response["joke"]
+
+  # ======== MESSAGE =========
+  user_input = params["user_input"]
+
+
+
+  erb(:display)
 }

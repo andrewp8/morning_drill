@@ -1,7 +1,16 @@
 
 
-<form action="/display" method="post">
-  <label for="location_field">Where are you located?</label>
-  <input id="location_field" type="text" name="user_location">
-  <button>Submit</button>
+  4) Generate a random color and said "your lucky color for today is THIS COLOR"
+      <p>Greetings, human friend! I'm your quirky morning buddy bot. Tell me where you're zooming off to today, and hit me with a hilariously awesome question to kickstart your day!</p>
+<form action="/display" method="post" class="border-2 m-2 p-2">
+    <div class="mb-3">
+    <label for="location" class="form-label">Destination, fellow human? Tell me!</label>
+    <input name="user_location" type="text" class="form-control" id="location" aria-describedby="location input">
+  </div>
+  <div class="mb-3">
+    <label for="user_input" class="form-label">Inquire, oh splendid human, your question!</label>
+    <input name="user_input" type="textbox" class="form-control" id="user_input">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
