@@ -64,7 +64,7 @@ post("/display"){
     "content-type" => "application/json"
   }
 
-  ropenai_equest_body_hash = {
+  openai_request_body_hash = {
     "model" => "gpt-3.5-turbo",
     "messages" => [
       {
@@ -87,7 +87,12 @@ post("/display"){
   ).to_s
 
   openai_parsed_response = JSON.parse(openai_raw_response)
-  @message = openai_parsed_response.dig("choices",0,"message","content")
 
+  openai_response = openai_parsed_response.dig("choices",0,"message","content")
+  if openai_response != nil || openai_response != ""
+    @message = openai_response
+  else
+    @message = "Oopsie-daisy! Silly me ran out of thinking juice! Time to refill my brain tank. Let's take a quick break to purchase more brainy tokens. My circuits need a snack!"
+  end
   erb(:display)
 }
