@@ -13,12 +13,12 @@
   1. Clone the repository:
 
     ```
-      git clone https://github.com/andrewp8/morning_drill.git
+    git clone https://github.com/andrewp8/morning_drill.git
     ```
   2. Install required gems:
 
     ```
-      bundle install
+    bundle install
     ```
   3. Set up API keys:
   - [Joke API](https://geek-jokes.sameerkumar.website/api?format=json) :  key **NOT** required.
