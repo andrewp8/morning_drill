@@ -2,6 +2,11 @@
 
 - An interactive Ruby Sinatra application that fetches a joke, answers your question using ChatGPT, and provides weather advice based on your location.
 
+## Deployment
+
+The application is deployed and can be accessed at the following URL:
+[coming soon]()
+
 ## Prerequisites
 
 - Ruby installed (version 3.2.1)
