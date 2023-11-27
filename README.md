@@ -5,7 +5,8 @@
 ## Deployment
 
 The application is deployed and can be accessed at the following URL:
-[coming soon]()
+[coming soon](https://morning-drill.onrender.com/)
+>**Note** it would take approcimately about 30s to fetch response from Openai API. Take a deep break and wait... I know...
 
 ## Prerequisites
 
